@@ -16,7 +16,7 @@ remaining hours (this will be done by synching his/her Google calendar with the 
 
 * It will send an email to his/her manager when a task is completed to keep manager in the loop.
 
-* This can also be made into a multi-user app by having login, adding the ability to form teams on the app where people in the same team can provide feedback to each others tasks.
+* This can also be made into a multi-user app by having login, adding the ability to form teams on the app where people in the same team can provide feedback to each others' tasks.
 
 ## Will Build with
 
