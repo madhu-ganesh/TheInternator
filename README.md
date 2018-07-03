@@ -18,4 +18,10 @@ remaining hours (this will be done by synching his/her Google calendar with the 
 
 * This can also be made into a multi-user app by having login, adding the ability to form teams on the app where people in the same team can provide feedback to each others tasks.
 
+## Will Build with
+
+* Express + node
+* Bootstrap + HTML/CSS + JavaScript
+* SQLiteStudio Database
+
 
