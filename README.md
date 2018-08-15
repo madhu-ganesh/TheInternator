@@ -2,7 +2,6 @@
 The Internator is a web application that helps interns manage their hours, keep track of their pay and a record of their day-to-day activities that are pending and completed.
 
 ## Author(s)
-
 * **Madhumeta Ganesh**
 
 ## Key Features
@@ -15,10 +14,30 @@ The Internator is a web application that helps interns manage their hours, keep 
 * As the user marks items he/she has completed, they will populate the “Accomplished tasks” list which can be used as a report for the weekly meeting.
 
 ## Built with
-
 * Bootstrap front-end template + HTML/CSS + JavaScript
 * Express.js + Node.js
 * SQLiteStudio Database
+
+## How to build, install and run this application
+Begin by cloning the git repository. 
+```
+git clone https://github.com/madhu-ganesh/TheInternator
+```
+
+Subsequently, download all the dependencies or packages required for the application by using the command:
+```
+npm install
+```
+
+Navigate to the cloned folder on your machine and start the server using,
+```
+node app.js
+```
+Now open http://localhost:8081 on your web browser and you can get started with using the application: 
+1. In the *Schedule* section of the page, you can input the hours worked every day or at the end of the week and click on "Save" to load them into the database
+2. In the *Pay* section of the page, your current bi-weekly cheque amount so far will be displayed. User will be alerted when it is payday when they click on the Pay tab in the upper right-hand corner.
+3. In the *To-do List* section of the page, new tasks that need to be completed can be added and removed, at your convenience. If you are finished with a task, just click on it and a line will appear across the task and populate the *Accomplished Tasks* list.
+4. In the *Accomplished Tasks* section of the page, tasks that are completed will show up in list format.
 
 ## License
 This project is licensed under Copyright © MIT License and Copyright (c) 2013-2018 Blackrock Digital LLC. The [LICENSE] (https://github.com/madhu-ganesh/TheInternator/blob/master/LICENSE) file has details regarding my project's license. The front-end template is taken from [https://startbootstrap.com/template-overviews/creative/](https://startbootstrap.com/template-overviews/creative/) with the theme name "Creative".
