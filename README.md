@@ -1,6 +1,10 @@
 # The Internator
 A web app that will help interns manage their hours, pay and day-to-day activities
 
+## Author(s)
+
+* **Madhumeta Ganesh** - *The Internator*
+
 ## Key Features
 * The application records how many hours the user has worked so far in the week.
 
