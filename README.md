@@ -24,4 +24,5 @@ remaining hours (this will be done by synching his/her Google calendar with the 
 * Bootstrap + HTML/CSS + JavaScript
 * SQLiteStudio Database
 
-
+## License
+This project is licensed under Copyright © MIT License and Copyright (c) 2013-2018 Blackrock Digital LLC. The [LICENSE] (https://github.com/madhu-ganesh/TheInternator/blob/master/LICENSE) file has details regarding my project's license. The front-end template is taken from [https://startbootstrap.com/template-overviews/creative/](https://startbootstrap.com/template-overviews/creative/) with the theme name "Creative".
