@@ -1,5 +1,5 @@
 # The Internator
-A web app that will help interns manage their hours, pay and day-to-day activities
+The Internator is a web application that helps interns manage their hours, keep track of their pay and a record of their day-to-day activities that are pending and completed.
 
 ## Author(s)
 
@@ -14,10 +14,10 @@ A web app that will help interns manage their hours, pay and day-to-day activiti
 
 * As the user marks items he/she has completed, they will populate the “Accomplished tasks” list which can be used as a report for the weekly meeting.
 
-## Will Build with
+## Built with
 
-* Express + node
-* Bootstrap + HTML/CSS + JavaScript
+* Bootstrap front-end template + HTML/CSS + JavaScript
+* Express.js + Node.js
 * SQLiteStudio Database
 
 ## License
