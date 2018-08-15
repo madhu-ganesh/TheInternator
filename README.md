@@ -26,3 +26,6 @@ remaining hours (this will be done by synching his/her Google calendar with the 
 
 ## License
 This project is licensed under Copyright © MIT License and Copyright (c) 2013-2018 Blackrock Digital LLC. The [LICENSE] (https://github.com/madhu-ganesh/TheInternator/blob/master/LICENSE) file has details regarding my project's license. The front-end template is taken from [https://startbootstrap.com/template-overviews/creative/](https://startbootstrap.com/template-overviews/creative/) with the theme name "Creative".
+
+## Contact Information
+The project was initiated and is maintained by myself, Madhumeta Ganesh. I can be reached at mganesh at pdx dot edu. Please report any bugs via the Issue Tracker [https://github.com/madhu-ganesh/TheInternator/issues](https://github.com/madhu-ganesh/TheInternator/issues)
