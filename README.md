@@ -45,6 +45,9 @@ This project is licensed under Copyright © MIT License and Copyright (c) 2013-2
 ## Contact Information
 The project was initiated and is maintained by myself, Madhumeta Ganesh. I can be reached at mganesh at pdx dot edu. Please report any bugs via the Issue Tracker at [https://github.com/madhu-ganesh/TheInternator/issues](https://github.com/madhu-ganesh/TheInternator/issues)
 
+## Presentation
+More information can be found in my powerpoint presentation slides at: https://github.com/madhu-ganesh/TheInternator/blob/master/Presentation%20files/Madhumeta_Ganesh_Internator_compressed.pptx
+
 ## Future Work
 *  The app will give suggestions of when he/she could complete the remaining hours (this will be done by synching his/her Google calendar with the app to know free timings, class schedule, etc).
 
