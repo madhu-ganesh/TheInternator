@@ -39,6 +39,11 @@ Now open http://localhost:8081 on your web browser and you can get started with 
 3. In the *To-do List* section of the page, new tasks that need to be completed can be added and removed, at your convenience. If you are finished with a task, just click on it and a line will appear across the task and populate the *Accomplished Tasks* list.
 4. In the *Accomplished Tasks* section of the page, tasks that are completed will show up in list format.
 
+Note: After following the above instructions, if running the command "node app.js" does not give you the message "go ahead and open http://localhost:8081 in your browser", then try running all following commands:
+* npm install express
+* npm install sqlite3
+* npm install socket.io
+
 ## License
 This project is licensed under Copyright © MIT License and Copyright (c) 2013-2018 Blackrock Digital LLC. The [LICENSE] (https://github.com/madhu-ganesh/TheInternator/blob/master/LICENSE) file has details regarding my project's license. The front-end template is taken from [https://startbootstrap.com/template-overviews/creative/](https://startbootstrap.com/template-overviews/creative/) with the theme name "Creative".
 
