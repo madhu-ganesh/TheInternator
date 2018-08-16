@@ -1,3 +1,6 @@
+// Copyright (c) Madhumeta Ganesh 2018
+// Available open source through the MIT License
+
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var header = require('gulp-header');
