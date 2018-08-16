@@ -249,7 +249,7 @@
       </div>
     </section>
 
-        	<form role="form" method="post" action="/addtask">
+    <form role="form" method="post" action="/addtask">
 
 	<!--Third tab has the todo list-->
     <section class="bg-primary" id="todo">
@@ -345,7 +345,7 @@
 			  });
 			  // When the Pay tab is active and it is payday, an alert will appear to the user
 			  // informing him/her about payday
-			  // The payday date is also hard-coded to be the 15th of each month but
+			  // The payday date is also hard-coded to be the 15th and 30th of each month but
 			  // ideally this should also be stored in a database and configurable
 			  var bla = document.getElementById('pay_alert');
 			  var calls = function() {  if (ggbl===15 || ggbl===30)
@@ -354,11 +354,14 @@
 			  
     		  bla.addEventListener('click', calls, true);
     		  
-    		objectSocket.on('unfinished_task', function(objectData) {
+    		  // I pull in all the unfinished and finished tasks from the database and display it 
+			// in the Todo List section and Accomplished Tasks section
+    		  objectSocket.on('unfinished_task', function(objectData) {
  
     			var undone_task = document.getElementsByClassName("undone_tasks");
 				var i;
 				var flag_task = 0;
+				// If the task already exists in the displayed list, I do not want to add the duplicate task to this list
 				for (i = 0; i < undone_task.length; i++) {
 			  	if (undone_task[i].firstChild.data===objectData.task) {
 					flag_task = 1;
@@ -386,6 +389,7 @@
 			  }
 			  }	  
     		});
+    		
     		objectSocket.on('done_task', function(objectData) { 
     		
     			var done_task1 = document.getElementsByClassName("done_tasks");
@@ -445,7 +449,7 @@
 					var li = document.createElement("li");
 					var t = document.createTextNode(ev.target.firstChild.data);
 					li.appendChild(t);
-					
+				   // storing all done tasks in a hidden input array to be sent to the server to be pushed to the database
 					var input = document.createElement("input");
 					input.setAttribute("type", "hidden");
 
@@ -478,7 +482,7 @@
 			  if (inputValue === '') {
 				alert("You must write something!");
 			  } else {
-			  
+			  // storing all undone tasks in a hidden input array to be sent to the server to be pushed to the database
 			  var input = document.createElement("input");
 				input.setAttribute("type", "hidden");
 

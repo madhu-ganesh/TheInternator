@@ -1,4 +1,4 @@
-// Code in this file regarding databases is mainly from database.js file uploaded on d2l
+// Code in this file regarding databases is mainly from database.js file uploaded on d2l by Prof. Simon Niklaus
 
 var express = require('express');
 var sqlite = require('sqlite3');
@@ -9,6 +9,8 @@ var path = require('path');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 var database = new sqlite.Database(__dirname + '/database.sqlite');
+
+// Below commented code is for Google Calender API syncing which is a work in progress
 
 /*const fs = require('fs');
 const readline = require('readline');
@@ -102,6 +104,7 @@ const TOKEN_PATH = 'token.json';*/
   });
 }*/
 
+
 var io = socket(app.listen(8081));
 
 database.serialize(function() {
@@ -168,8 +171,6 @@ app.use('/', express.static(__dirname));
 
 			functionSuccess(JSON.stringify(objectRows, null, 4));
 		});
-		
-		
 	};
 
 	var functionError = function(strError) {
@@ -207,7 +208,6 @@ app.use('/', express.static(__dirname));
 			SELECT * FROM to_do where done=0
 		`, function(objectError, objectRows) {
 			
-
 			functionTaskSuccess(JSON.stringify(objectRows, null, 4));
 		});
 	};
@@ -236,7 +236,6 @@ app.use('/', express.static(__dirname));
 				io.emit('done_task', exp4[ii]);
 			}
 		};
-		
 	};
 	
 io.on('connection', function(objectSocket) {
@@ -248,8 +247,7 @@ io.on('connection', function(objectSocket) {
 		
 	
 	// Reset monday, tuesday, wednesday, thursday, friday to zero on monday as we are starting a new week
-	// and would like to calculate pay from 0 for that week
-	// The flag helps in updating the table only once on monday and not every time we load
+	// The "flag" variable helps in updating the table only once on monday and not every time we load
 	// the page on monday
 	if ((d.getDay()==1) && flag==0 && flag2==0)
 	{	flag=1;
@@ -268,6 +266,12 @@ io.on('connection', function(objectSocket) {
 		database.run(statement4);
 		database.run(statement5);
 	}
+	
+	// Reset monday, tuesday, wednesday, thursday, friday to zero on the second monday as we are starting a new week
+	// and save the previous week hours total in the database (will be used later on to calculate bi-weekly cheque)
+	// The "flag" variable helps in updating the table only once on monday and not every time we load
+	// the page on monday
+	// The "flag2" variable helps in performing this operation of saving previous week hours only on alternate mondays
 	else if ((d.getDay()==1) && flag==0 && flag2==1)
 	{
 		flag=1;
@@ -336,7 +340,7 @@ app.post("/addtask", (req, res) => {
 	var ii;
 	
 	if (typeof req.body.done!=="undefined") {
-	console.log("done   "+req.body.done);
+	//console.log("done   "+req.body.done);
 	var ggg = Number(req.body.done.length);
 	for (ii=0;ii<ggg;ii++)
 	{
@@ -347,7 +351,7 @@ app.post("/addtask", (req, res) => {
 	}
 
 	if (typeof req.body.undone!=="undefined") {
-	console.log("undone   "+req.body.undone);
+	//console.log("undone   "+req.body.undone);
 	var yyy = Number(req.body.undone.length);
 	for (ii=0;ii<yyy;ii++)
 	{
