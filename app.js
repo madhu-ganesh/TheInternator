@@ -1,3 +1,6 @@
+// Copyright (c) Madhumeta Ganesh 2018
+// Available open source through the MIT License
+
 // Code in this file regarding databases is mainly from database.js file uploaded on d2l by Prof. Simon Niklaus
 
 var express = require('express');
