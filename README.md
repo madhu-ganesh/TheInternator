@@ -53,9 +53,12 @@ The project was initiated and is maintained by myself, Madhumeta Ganesh. I can b
 ## Presentation
 More information can be found in my powerpoint presentation slides at: https://github.com/madhu-ganesh/TheInternator/blob/master/Presentation%20files/Madhumeta_Ganesh_Internator_compressed.pptx
 
-## Future Work
-*  The app will give suggestions of when he/she could complete the remaining hours (this will be done by synching his/her Google calendar with the app to know free timings, class schedule, etc).
+## Work in Progress
+* The app will give suggestions of when he/she could complete the remaining hours (this will be done by synching his/her Google calendar with the app to know free timings, class schedule, etc).
 
+* The app will have a Settings tab where users will be able to configure how many hours they are expected to work during a week, what is their hourly pay and the date of their next bi-weekly cheque (currently these values are hard-coded).
+
+## Future Work
 * The app will have the functionality of adding deadlines for items on the “To-Do” list and send appropriate reminder emails as the time to accomplish this task gets closer.
 
 * It will send an email to his/her manager when a task is completed to keep manager in the loop.
