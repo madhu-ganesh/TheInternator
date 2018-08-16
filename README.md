@@ -19,17 +19,17 @@ The Internator is a web application that helps interns manage their hours, keep 
 * SQLiteStudio Database
 
 ## How to build, install and run this application
-Begin by cloning the git repository. 
+Begin by cloning the git repository:
 ```
 git clone https://github.com/madhu-ganesh/TheInternator
 ```
 
-Subsequently, download all the dependencies or packages required for the application by using the command:
+Subsequently, navigate to the cloned folder and download all the dependencies or packages required for the application by using the command:
 ```
 npm install
 ```
 
-Navigate to the cloned folder on your machine and start the server using,
+Start the server using:
 ```
 node app.js
 ```
