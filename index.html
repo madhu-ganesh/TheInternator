@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A web app for interns to make their life easier">
+    <meta name="author" content="Madhumeta Ganesh">
+
+    <title>The Internator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom fonts for this template -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/creative.min.css" rel="stylesheet" type="text/css">
+
+	<!-- Reference library for socket.io -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+
+	<!--The styling below is for the todo list and accomplished list and is from https://www.w3schools.com/howto/howto_js_todolist.asp-->
+		<style>
+		/* Remove margins and padding from the list */
+		ul {
+		  margin: 0;
+		  padding: 0;
+		}
+
+		/* Style the list items */
+		ul.a li {
+		  cursor: pointer;
+		  position: relative;
+		  padding: 12px 8px 12px 40px;
+		  list-style-type: none;
+		  background: #eee;
+		  font-size: 18px;
+		  transition: 0.2s;
+  
+		  /* make the list items unselectable */
+		  -webkit-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		/* Set all odd list items to a different color (zebra-stripes) */
+		ul.a li:nth-child(odd) {
+		  background: #f9f9f9;
+		}
+
+		/* Darker background-color on hover */
+		ul.a li:hover {
+		  background: #ddd;
+		}
+
+		/* When clicked on, add a background color and strike out text */
+		ul.a li.checked {
+		  background: #888;
+		  color: #fff;
+		  text-decoration: line-through;
+		}
+
+		/* Add a "checked" mark when clicked on */
+		ul.a li.checked::before {
+		  content: '';
+		  position: absolute;
+		  border-color: #fff;
+		  border-style: solid;
+		  border-width: 0 2px 2px 0;
+		  top: 10px;
+		  left: 16px;
+		  transform: rotate(45deg);
+		  height: 15px;
+		  width: 7px;
+		}
+
+		/* Style the close button */
+		.close {
+		  position: absolute;
+		  right: 0;
+		  top: 0;
+		  padding: 12px 16px 12px 16px;
+		}
+
+		.close:hover {
+		  background-color: #f44336;
+		  color: white;
+		}
+
+		/* Style the header */
+		.header {
+		  background-color: #f05f41;
+		  padding: 30px 40px;
+		  text-align: center;
+		}
+
+		/* Clear floats after the header */
+		.header:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+
+		/* Style the input */
+		.item {
+		  border: none;
+		  width: 75%;
+		  padding: 10px;
+		  float: left;
+		  font-size: 16px;
+		}
+
+		/* Style the "Add" button */
+		.addButton {
+		  padding: 10px;
+		  width: 25%;
+		  background: #d9d9d9;
+		  color: #555;
+		  float: left;
+		  text-align: center;
+		  font-size: 16px;
+		  cursor: pointer;
+		  transition: 0.3s;
+		}
+
+		.addButton:hover {
+		  background-color: #bbb;
+		}
+		</style>
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">The Internator</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul id="myTab" class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#schedule">Schedule</a>
+            </li>
+            <li class="nav-item" id="pay_alert">
+              <a class="nav-link js-scroll-trigger" href="#pay">Pay</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#todo">To-do List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#done">Accomplished Tasks</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="masthead text-center text-white d-flex">
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <h1 class="text-uppercase">
+              <strong>The Internator</strong>
+            </h1>
+            <hr>
+          </div>
+          <div class="col-lg-8 mx-auto">
+            <p class="text-faded mb-5">A web app that will help interns manage their hours, pay and day-to-day activities</p>
+            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#schedule">Let's Get Started!</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+	<!--First tab has the schedule-->
+    <section class="bg-primary" id="schedule">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+          	
+          	
+          	<h2 class="section-heading text-white"> Total hours worked this week </h2>
+			<hr class="light my-4">
+			<!--Below form group template is from https://bootstrapbay.com/blog/working-bootstrap-contact-form/-->
+			<form class="form-horizontal" role="form" method="post" action="/addname">
+			 
+			 <div class="form-group">
+						<label for="monday" class="col-sm-2 text-faded mb-4">Monday: </label>
+							<input type="text" class="form-control" id="monday" name="monday" placeholder="0" style="text-align: center;">
+			</div>
+			
+			<div class="form-group">
+						<label for="tuesday" class="col-sm-2 text-faded mb-4">Tuesday: </label>
+							<input type="text" class="form-control" id="tuesday" name="tuesday" placeholder="0" style="text-align: center;">
+			</div>
+			
+			 <div class="form-group">
+						<label for="wednesday" class="col-sm-2 text-faded mb-4">Wednesday: </label>
+							<input type="text" class="form-control" id="wednesday" name="wednesday" placeholder="0" style="text-align: center;">
+			</div>
+			
+			<div class="form-group">
+						<label for="thursday" class="col-sm-2 text-faded mb-4">Thursday: </label>
+							<input type="text" class="form-control" id="thursday" name="thursday" placeholder="0" style="text-align: center;">
+			</div>
+			
+			<div class="form-group">
+						<label for="friday" class="col-sm-2 text-faded mb-4">Friday: </label>
+							<input type="text" class="form-control" id="friday" name="friday" placeholder="0" style="text-align: center;">
+			</div>
+			</br>
+			<div class="form-group">
+						<div class="col-sm-13">
+							<input id="submit" name="submit" type="submit" value="Save" class="btn btn-light btn-xl js-scroll-trigger">
+						</div>
+			</div>
+			<div class="form-group">
+						<div class="col-sm-12">
+							<p id="hours_message" class="text-white"></p>
+						</div>
+			</div>
+  			 
+  			 </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+	<!--Second tab has the pay information-->
+    <section id="pay" class="bg-dark text-white">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+          	<h2 id="total_pay" class ="mb-4 text-white" name="total_pay"></h2>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        	<form role="form" method="post" action="/addtask">
+
+	<!--Third tab has the todo list-->
+    <section class="bg-primary" id="todo">
+      <div class="container">
+        <div class="row">
+        	<div class="col-lg-8 mx-auto text-center">
+			<div id="mm" class="header">
+  				<h2 style="margin:5px" class ="mb-4 text-white">My To Do List</h2>
+  				<input type="text" id="myInput" class="item" placeholder="Enter task here...">
+  				<span onclick="createNewTask()" class="addButton">+</span>
+			</div>
+			<hr class="light my-4">
+			<ul id="tasklist" name="tasklist" class="a">
+			</ul>
+			</br>
+			</br>
+			<input id="submit" name="submit" type="submit" value="Push all Tasks to database" class="btn btn-light btn-xl js-scroll-trigger">
+  		    
+  		    </div>
+        </div>
+      </div>
+    </section>
+
+
+	<!--Fourth tab has the accomplished tasks list-->
+    <section id="done">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+          	<div id="mm" class="header">
+  				<h2 style="margin:5px" class ="mb-4 text-white">Accomplished Tasks List</h2>
+			</div>
+			<ul id="accomplishedlist" name="accomplishedlist" class="a">
+			</ul>
+			
+          </div>
+        </div>
+      </div>
+    </section>
+    </form>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/creative.min.js"></script>
+    
+    
+    	<!--The javascript section-->
+		<script>
+			var ggbl;
+			var mon, tue, wed, thu, fri;
+			// When I connect I want to pull some information from the database through sockets
+			var objectSocket = io.connect('http://localhost:8081/'); // do not change this line
+			// I pull in how many hours I have worked for the week currently and display it 
+			// in a paragraph element on the Schedule tab
+			objectSocket.on('monday', function(objectData) { 
+			  mon=objectData.hours;
+			  });
+			  objectSocket.on('tuesday', function(objectData) { 
+			  tue=objectData.hours;
+			  });
+			  objectSocket.on('wednesday', function(objectData) { 
+			  wed=objectData.hours;
+			  });
+			  objectSocket.on('thursday', function(objectData) { 
+			  thu=objectData.hours;
+			  });
+			  objectSocket.on('friday', function(objectData) { 
+			  fri=objectData.hours;
+			  });
+			  // The timeout is to let all the information get loaded first before I 
+			  // display the message, as without a timeout, I get undefined
+			  // Currently I have a 16-hour work week, hence the check against 16. Ideally
+			  // this value should be in the database
+			  setTimeout(function(){
+			  			  document.getElementById('hours_message').innerHTML="You have worked "+ mon + " hours on Monday, "+ tue+" hours on Tuesday, "+wed+" hours on Wednesday, "+ thu+ " hours on Thursday and " + fri + " hours on Friday. ";
+			  			  if ((mon+tue+wed+thu+fri)<16)
+			  			  	document.getElementById('hours_message').innerHTML+="You still need to work "+(16-(mon+tue+wed+thu+fri))+" hours.";
+			  			  	}, 500);
+
+			  objectSocket.on('total_pay', function(objectData) { 
+			  document.getElementById("total_pay").innerHTML="Your bi-weekly cheque currently amounts to $" + objectData.total_pay;  
+			  });
+			  objectSocket.on('todays_date', function(objectData) { 
+			  ggbl=objectData.todays_date;
+			  });
+			  // When the Pay tab is active and it is payday, an alert will appear to the user
+			  // informing him/her about payday
+			  // The payday date is also hard-coded to be the 15th of each month but
+			  // ideally this should also be stored in a database and configurable
+			  var bla = document.getElementById('pay_alert');
+			  var calls = function() {  if (ggbl===15 || ggbl===30)
+			  			 { alert("Today is payday!");}
+			  			  	};
+			  
+    		  bla.addEventListener('click', calls, true);
+    		  
+    		objectSocket.on('unfinished_task', function(objectData) {
+ 
+    			var undone_task = document.getElementsByClassName("undone_tasks");
+				var i;
+				var flag_task = 0;
+				for (i = 0; i < undone_task.length; i++) {
+			  	if (undone_task[i].firstChild.data===objectData.task) {
+					flag_task = 1;
+			  	}
+				}
+    		
+    		 if (!flag_task) {
+				var li2 = document.createElement("li");
+    			var t2 = document.createTextNode(objectData.task);
+    			li2.appendChild(t2);
+    			li2.className = "undone_tasks";
+    			document.getElementById("tasklist").appendChild(li2);	
+    			
+			  var span = document.createElement("SPAN");
+			  var txt = document.createTextNode("\u00D7");
+			  span.className = "close";
+			  span.appendChild(txt);
+			  li2.appendChild(span);
+
+			  for (i = 0; i < close.length; i++) {
+				close[i].onclick = function() {
+				  var div = this.parentElement;
+				  div.style.display = "none";
+				}
+			  }
+			  }	  
+    		});
+    		objectSocket.on('done_task', function(objectData) { 
+    		
+    			var done_task1 = document.getElementsByClassName("done_tasks");
+				var i;
+				var flag_task = 0;
+				for (i = 0; i < done_task1.length; i++) {
+			  	if (done_task1[i].firstChild.data===objectData.task) {
+					flag_task = 1;
+			  	}
+				}
+    		
+    		if (!flag_task)  {
+				var li2 = document.createElement("li");
+    			var t2 = document.createTextNode(objectData.task);
+    			li2.appendChild(t2);
+    			li2.className = "done_tasks";
+    			document.getElementById("accomplishedlist").appendChild(li2);
+    			
+			  var span = document.createElement("SPAN");
+			  var txt = document.createTextNode("\u00D7");
+			  span.className = "close";
+			  span.appendChild(txt);
+			  li2.appendChild(span);
+
+			  for (i = 0; i < close.length; i++) {
+				close[i].onclick = function() {
+				  var div = this.parentElement;
+				  div.style.display = "none";
+				}
+			  }
+			  }		  
+    		});
+    		
+    		// The following code is majorly from https://www.w3schools.com/howto/howto_js_todolist.asp
+    		// but I have made some modifications to it
+    		// Code regarding accomplished task list was developed by me
+    		
+			// Click on a close button to hide the current list item
+			var close = document.getElementsByClassName("close");
+			var i;
+			for (i = 0; i < close.length; i++) {
+			  close[i].onclick = function() {
+				var div = this.parentElement;
+				div.style.display = "none";
+			  }
+			}
+
+			// Add a "checked" symbol when clicking on a list item
+			var list = document.querySelector('ul.a');
+			list.addEventListener('click', function(ev) {
+			  if (ev.target.tagName === 'LI') {
+				ev.target.classList.toggle('checked');
+				
+				
+				if (ev.target.classList.contains('checked'))
+				{	//ev.target.removeChild(input);
+					var li = document.createElement("li");
+					var t = document.createTextNode(ev.target.firstChild.data);
+					li.appendChild(t);
+					
+					var input = document.createElement("input");
+					input.setAttribute("type", "hidden");
+
+					input.setAttribute("name", "done[]");
+
+					input.setAttribute("value", ev.target.firstChild.data);
+
+					li.appendChild(input);					
+					
+					document.getElementById("accomplishedlist").appendChild(li);
+				}
+				else
+				{	var yy = document.getElementById("accomplishedlist")
+					var xx = document.getElementById("accomplishedlist").getElementsByTagName('li');
+					
+					for (var iii = 0; iii < xx.length; iii++) {
+    					if (xx[iii].firstChild.data===ev.target.firstChild.data)
+    						yy.removeChild(xx[iii]);
+  					}
+				}
+			  }
+			}, false);
+
+			// Create a new list item when clicking on the "Add" button
+			function createNewTask() {
+			  var li = document.createElement("li");
+			  var inputValue = document.getElementById("myInput").value;
+			  var t = document.createTextNode(inputValue);
+			  li.appendChild(t);
+			  if (inputValue === '') {
+				alert("You must write something!");
+			  } else {
+			  
+			  var input = document.createElement("input");
+				input.setAttribute("type", "hidden");
+
+				input.setAttribute("name", "undone[]");
+
+				input.setAttribute("value", inputValue);
+
+				li.appendChild(input);
+			  
+				document.getElementById("tasklist").appendChild(li);
+			  }
+			  document.getElementById("myInput").value = "";
+
+			  var span = document.createElement("SPAN");
+			  var txt = document.createTextNode("\u00D7");
+			  span.className = "close";
+			  span.appendChild(txt);
+			  li.appendChild(span);
+
+			  for (i = 0; i < close.length; i++) {
+				close[i].onclick = function() {
+				  var div = this.parentElement;
+				  div.style.display = "none";
+				}
+			  }
+			}
+  	</script>
+
+  </body>
+
+</html>
