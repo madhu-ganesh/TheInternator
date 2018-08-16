@@ -54,6 +54,8 @@ The project was initiated and is maintained by myself, Madhumeta Ganesh. I can b
 More information can be found in my powerpoint presentation slides at: https://github.com/madhu-ganesh/TheInternator/blob/master/Presentation%20files/Madhumeta_Ganesh_Internator_compressed.pptx
 
 ## Work in Progress
+* Some issues with pushing tasks to the database that are being fixed
+
 * The app will give suggestions of when he/she could complete the remaining hours (this will be done by synching his/her Google calendar with the app to know free timings, class schedule, etc).
 
 * The app will have a Settings tab where users will be able to configure how many hours they are expected to work during a week, what is their hourly pay and the date of their next bi-weekly cheque (currently these values are hard-coded).
